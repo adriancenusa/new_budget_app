@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "882797649489",
+    "project_id": "budget-app-82983",
+    "storage_bucket": "budget-app-82983.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882797649489:android:be9345df36dd54ecb66270",
+        "android_client_info": {
+          "package_name": "com.example.new_budget_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882797649489-p46rrrvc74e8f9krn8oumhn9vdmv97v0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.new_budget_app",
+            "certificate_hash": "6211e6b5242083474308894fc20ef748b5860967"
+          }
+        },
+        {
+          "client_id": "882797649489-gqs5ar19hhn0bv42rdem9ge064l9k00v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACOHjulkQT3kDRS6mwTzV4qxg3CYA-mYU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "882797649489-gqs5ar19hhn0bv42rdem9ge064l9k00v.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "882797649489-4i2hjavd1q7ivfh8ljr6ca30l9art3op.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.newBudgetApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882797649489:android:70cae7a1b27db4a8b66270",
+        "android_client_info": {
+          "package_name": "com.utilitree.budget"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882797649489-ivfnao0id49lbqeombl73hdutfekn69g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.utilitree.budget",
+            "certificate_hash": "6211e6b5242083474308894fc20ef748b5860967"
+          }
+        },
+        {
+          "client_id": "882797649489-gqs5ar19hhn0bv42rdem9ge064l9k00v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACOHjulkQT3kDRS6mwTzV4qxg3CYA-mYU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "882797649489-gqs5ar19hhn0bv42rdem9ge064l9k00v.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "882797649489-4i2hjavd1q7ivfh8ljr6ca30l9art3op.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.newBudgetApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
