@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_budget_app/provider/user_provider.dart';
 import 'package:new_budget_app/screens/login_screen.dart';
+import 'package:new_budget_app/screens/setup_screen.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'screens/home_screen.dart';
@@ -14,7 +15,10 @@ import 'screens/monthly_overview_screen.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
-  runApp(MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => CategoryModel(),
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
