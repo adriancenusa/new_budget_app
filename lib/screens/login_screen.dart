@@ -164,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
     signInWithGoogle().then((user) {
       var userProvider = Provider.of<UserProvider>(context, listen: false);
       userProvider.setUser(user);
-      checkIfUserSetupIsCompleted(user!).then((value) {
+      UserService().checkIfUserSetupIsCompleted(user!).then((value) {
         value == true
             ? Navigator.pushReplacement(
                 context,

@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_budget_app/models/expense.dart';
+import 'package:new_budget_app/utils/user_service.dart';
 import 'package:provider/provider.dart';
+
+import '../models/category.dart';
+import '../provider/user_provider.dart';
+import '../utils/category_service.dart';
+import 'home_screen.dart';
 
 final GlobalKey<AnimatedListState> _listKey = GlobalKey();
 
 void _addCategory(BuildContext context) {
   var category = Category(
+    id: UniqueKey().toString(),
     name: 'New Category',
     budget: 0.0,
     icon: Icons.add_circle_outline,
@@ -13,18 +21,6 @@ void _addCategory(BuildContext context) {
   var provider = Provider.of<CategoryModel>(context, listen: false);
   provider.addCategory(category);
   _listKey.currentState?.insertItem(0, duration: Duration(milliseconds: 300));
-}
-
-void _deleteCategory(BuildContext context, Category category) {
-  var provider = Provider.of<CategoryModel>(context, listen: false);
-
-  _listKey.currentState?.removeItem(
-    provider.categories.indexOf(category),
-    (BuildContext context, Animation<double> animation) {
-      return _buildDeleteAnimation(context, animation);
-    },
-  );
-  provider.removeCategory(category);
 }
 
 Widget _buildDeleteAnimation(
@@ -38,15 +34,6 @@ Widget _buildDeleteAnimation(
   );
 }
 
-class Category {
-  String id = UniqueKey().toString();
-  String name;
-  double budget;
-  IconData icon;
-
-  Category({required this.name, required this.budget, required this.icon});
-}
-
 class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -55,17 +42,27 @@ class CategoryScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create Categories'),
+        title: const Text('Setup Categories'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () async {
+              var uid =
+                  Provider.of<UserProvider>(context, listen: false).user?.uid;
+              var expense = Expense(id: UniqueKey().toString(), title: "exampleExpense", amount: 0.1, date: DateTime.now(), categoryId: categories[0].id);
+              UserService().completeSetup(userId: uid!, categories: categories, dummyExpense: expense);
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()));
+            },
+            child: Text(
+              'Next',
+              style: TextStyle(fontSize: 18, color: Colors.white),
+            ),
+          ),
+        ],
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              'Set up your budget categories. You can edit the default categories or add your own.',
-              style: TextStyle(fontSize: 18),
-            ),
-          ),
+          SizedBox(height: 8),
           Expanded(
               child: AnimatedList(
             key: _listKey,
@@ -77,34 +74,10 @@ class CategoryScreen extends StatelessWidget {
             },
           )),
           SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ElevatedButton(
-                onPressed: () => _addCategory(context),
-                child: Text('Add Category'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  // Redirect to the main page
-                  Navigator.pop(context);
-                },
-                child: Text('Save'),
-              ),
-            ],
-          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Provider.of<CategoryModel>(context, listen: false).addCategory(
-            Category(
-              name: 'New Category',
-              budget: 0.0,
-              icon: Icons.add_circle_outline,
-            ),
-          );
-        },
+        onPressed: () => _addCategory(context),
         child: Icon(Icons.add),
       ),
     );
@@ -148,6 +121,9 @@ class _CategoryCardState extends State<CategoryCard> {
   @override
   void initState() {
     super.initState();
+    widget.category.name == 'New Category'
+        ? _isEditing = true
+        : _isEditing = false;
     _nameController.text = widget.category.name;
     _budgetController.text = widget.category.budget.toString();
   }
@@ -288,9 +264,17 @@ class _CategoryCardState extends State<CategoryCard> {
 }
 
 class CategoryModel extends ChangeNotifier {
-  List<Category> _categories = [
-    Category(name: 'Shopping', budget: 0.0, icon: Icons.shopping_cart),
-    Category(name: 'Leisure', budget: 0.0, icon: Icons.sports_soccer),
+  final List<Category> _categories = [
+    Category(
+        id: UniqueKey().toString(),
+        name: 'Shopping',
+        budget: 0.0,
+        icon: Icons.shopping_cart),
+    Category(
+        id: UniqueKey().toString(),
+        name: 'Leisure',
+        budget: 0.0,
+        icon: Icons.sports_soccer),
   ];
 
   List<Category> get categories => _categories;

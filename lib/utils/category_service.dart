@@ -31,4 +31,10 @@ class CategoryService {
   Future<void> deleteCategory(String categoryId) async {
     await categoriesCollection.doc(categoryId).delete();
   }
+
+  Future<void> saveCategories(List<Category> categories) async {
+    for (Category category in categories) {
+      await categoriesCollection.doc(category.id).set(category.toFirestore());
+    }
+  }
 }

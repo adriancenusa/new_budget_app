@@ -2,10 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Category {
-  final String id;
-  String name;
-  final IconData icon;
-  final double budget;
+   final String id;
+   String name;
+   IconData icon;
+   double budget;
 
   Category({required this.id, required this.name, required this.icon, required this.budget});
 
